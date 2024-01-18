@@ -22,7 +22,7 @@ export default function App() {
   const isResultDateFuture = now.diff(resultDate, "day") < 0;
   const isResultDateToday = now.diff(resultDate, "day") === 0;
   const doSomething = () => {
-    se0tIsShowResult(true);
+    setIsShowResult(true);
   };
   return (
     <ScrollView>
@@ -38,12 +38,7 @@ export default function App() {
           value={value}
           onValueChange={(date) => setValue(date)}
         />
-        <Button
-          title={
-            "Calculate My Billion-Second-Birthday (billionth birthsecond)!"
-          }
-          onPress={doSomething}
-        />
+        <Button title={"Go!"} onPress={doSomething} />
         <Text>{`Your day is: ${resultDate
           .format("MMM-DD YYYY HH:mm:ss")
           .toString()}`}</Text>
