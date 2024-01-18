@@ -8,10 +8,9 @@ import {
   Button,
 } from "react-native";
 import DateTimePicker from "react-native-ui-datepicker";
-import DatePicker from "react-native-datepicker";
 
 import dayjs from "dayjs";
-import { useState, Component } from "react";
+import { useState } from "react";
 
 export default function App() {
   const initialTime = dayjs().subtract(18, "year");
@@ -51,74 +50,8 @@ export default function App() {
 
         <StatusBar style="auto" />
       </View>
-      <View>
-        <Text>This is another native date picker:</Text>
-        <MyDatePicker />
-        {/* <DatePicker
-          style={{ width: 200 }}
-          date={value}
-          mode={"date"}
-          placeholder={"select date"}
-          format={"YYYY-MM-DD"}
-          minDate={"2016-05-01"}
-          maxDate={"2016-06-01"}
-          confirmBtnText={"Confirm"}
-          cancelBtnText={"Cancel"}
-          customStyles={{
-            dateIcon: {
-              position: "absolute",
-              left: 0,
-              top: 4,
-              marginLeft: 0,
-            },
-            dateInput: {
-              marginLeft: 36,
-            },
-            // ... You can check the source to find the other keys.
-          }}
-          onDateChange={(date) => setValue(date)}
-        /> */}
-      </View>
     </ScrollView>
   );
-}
-
-class MyDatePicker extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { date: "2016-05-15" };
-  }
-
-  render() {
-    return (
-      <DatePicker
-        style={{ width: 200 }}
-        date={this.state.date}
-        mode="date"
-        placeholder="select date"
-        format="YYYY-MM-DD"
-        minDate="2016-05-01"
-        maxDate="2016-06-01"
-        confirmBtnText="Confirm"
-        cancelBtnText="Cancel"
-        customStyles={{
-          dateIcon: {
-            position: "absolute",
-            left: 0,
-            top: 4,
-            marginLeft: 0,
-          },
-          dateInput: {
-            marginLeft: 36,
-          },
-          // ... You can check the source to find the other keys.
-        }}
-        onDateChange={(date) => {
-          this.setState({ date: date });
-        }}
-      />
-    );
-  }
 }
 
 const styles = StyleSheet.create({
