@@ -8,6 +8,8 @@ import {
   Button,
 } from "react-native";
 import DateTimePicker from "react-native-ui-datepicker";
+// import Canvas from "react-native-canvas";
+import Starfield from "./Starfield";
 
 import dayjs from "dayjs";
 import { useState } from "react";
@@ -24,9 +26,22 @@ export default function App() {
   const doSomething = () => {
     setIsShowResult(true);
   };
+  // const handleCanvas = (canvas) => {
+  //   const ctx = canvas.getContext("2d");
+  //   ctx.fillStyle = "purple";
+  //   ctx.fillRect(0, 0, 100, 100);
+  // };
   return (
     <ScrollView>
-      <View style={styles.container}>
+      {/* <Canvas ref={handleCanvas} /> */}
+      <Starfield
+        starCount={2000}
+        starColor={[255, 255, 255]}
+        starSize={3}
+        speedFactor={0.6}
+        backgroundColor="black"
+      />
+      {/* <View style={styles.container}>
         <Image
           source={{
             uri: "https://reactnative.dev/docs/assets/p_cat2.png",
@@ -44,7 +59,7 @@ export default function App() {
           .toString()}`}</Text>
 
         <StatusBar style="auto" />
-      </View>
+      </View> */}
     </ScrollView>
   );
 }
