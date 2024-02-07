@@ -1,23 +1,76 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Dimensions, Text } from "react-native";
 
 // You can import from local files
 import Starfield from "./Starfield";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
+const vw = windowWidth / 100;
 
 export default class App extends Component {
+  // const
   render() {
     return (
-      <View style={styles.container}>
-        <Starfield />
+      <View style={styles.page}>
+        <View style={styles.starfield}>
+          <Starfield />
+        </View>
+        <View style={styles.cardWrapper}>
+          <View style={styles.card}>
+            <Text style={styles.text}>What?</Text>
+          </View>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  page: {
     flex: 1,
+    position: "relative",
+    // display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    // height: "100vh",
+    // width: "100vw",
     backgroundColor: "#000",
+  },
+  starfield: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    // display: "flex",
+    // justifyContent: "center",
+    // alignItems: "center",
+    height: "100%",
+    width: "100%",
+    backgroundColor: "transparent",
+  },
+  cardWrapper: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    width: "100%",
+    backgroundColor: "transparent",
+  },
+  card: {
+    backgroundColor: `hsl(260, 100% 3%)`,
+    color: "rgb(255, 255, 255)",
+    // backgroundColor: `white`,
+    width: windowWidth / 1.4,
+    aspectRatio: 1.5 / 1,
+    alignItems: "center",
+    justifyContent: "center",
+    fontFamily: "sans-serif",
+    borderRadius: 3.6 * vw,
+  },
+  text: {
+    color: "rgb(255, 255, 255)",
   },
 });
 
