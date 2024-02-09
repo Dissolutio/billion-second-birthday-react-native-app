@@ -5,12 +5,10 @@ import {
   StyleSheet,
   Dimensions,
   Text,
-  Image,
-  ScrollView,
   Button,
+  SafeAreaView,
 } from "react-native";
-import DateTimePicker from "react-native-ui-datepicker";
-
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import dayjs from "dayjs";
 import Starfield from "./Starfield";
 
@@ -70,7 +68,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   text: {
-    color: "rgb(255, 255, 255)",
+    // color: "rgb(255, 255, 255)",
+    color: "black",
   },
 });
 
@@ -78,7 +77,23 @@ const BirthdayForm = () => {
   const initialTime = dayjs().subtract(18, "year");
   const [value, setValue] = useState(initialTime);
   const onChange = (event, selectedDate) => {
-    setDate(selectedDate);
+    setValue(dayjs(selectedDate));
+  };
+  const showMode = (currentMode) => {
+    DateTimePickerAndroid.open({
+      value: new Date(value),
+      onChange,
+      mode: currentMode,
+      is24Hour: false,
+    });
+  };
+
+  const showDatepicker = () => {
+    showMode("date");
+  };
+
+  const showTimepicker = () => {
+    showMode("time");
   };
   const [isShowResult, setIsShowResult] = useState(false);
   const resultDate = dayjs(value).add(1_000_000_000, "seconds");
@@ -91,21 +106,14 @@ const BirthdayForm = () => {
   };
   return (
     <>
-      <Text style={styles.text}>Enter your birthday below:</Text>
-      <DateTimePicker
-        mode="date"
-        headerTextStyle={{ color: "white" }}
-        todayTextStyle={{ color: "white" }}
-        weekDaysTextStyle={{ color: "white" }}
-        // calendarTextStyle={{ color: "white" }}
-        selectedTextStyle={{ color: "white" }}
-        timePickerTextStyle={{ color: "white" }}
-        value={value}
-        onValueChange={(date) => setValue(date)}
-      />
+      <SafeAreaView>
+        <Button onPress={showDatepicker} title="Enter your birth date!" />
+        <Button onPress={showTimepicker} title="Update your birth time!" />
+        <Text>selected: {dayjs(value).format("MMM-DD YYYY HH:mm A")}</Text>
+      </SafeAreaView>
       <Button title={"Go!"} onPress={doSomething} />
-      <Text style={styles.text}>{`Your day is: ${resultDate
-        .format("MMM-DD YYYY HH:mm:ss")
+      <Text style={styles.text}>{`Your billion-second birthday is: ${resultDate
+        .format("MMM-DD YYYY HH:mm A")
         .toString()}`}</Text>
     </>
   );
