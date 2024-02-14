@@ -6,8 +6,6 @@ import { overlayItemStyle } from "./styles";
 import { GlowCard } from "./GlowCard";
 import { BirthdayForm } from "./BirthdayForm";
 
-const windowWidth = Dimensions.get("window").width;
-
 export default class App extends Component {
   render() {
     return (
@@ -19,7 +17,6 @@ export default class App extends Component {
           <FullScreenCard>
             <GlowCard>
               <BirthdayForm />
-              <Text style={{ color: "#fff" }}>Yo!</Text>
             </GlowCard>
           </FullScreenCard>
         </View>
@@ -45,11 +42,14 @@ const styles = StyleSheet.create({
 });
 
 const FullScreenCard = (props) => {
+  const windowWidth = Dimensions.get("window").width;
+  const windowHeight = Dimensions.get("window").height;
   return (
     <View
       style={{
         width: windowWidth / 1.4,
-        aspectRatio: 1.5 / 1,
+        height: windowHeight / 1.4,
+        // aspectRatio: 1 / 1,
       }}
     >
       {props.children}
