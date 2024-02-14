@@ -12,20 +12,21 @@ import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import dayjs from "dayjs";
 import Starfield from "./Starfield";
 import { AnimatedRadialGradient } from "./RadialGradient";
+import { overlayItemStyle } from "./styles";
+import { GlowCard } from "./GlowCard";
 
 const windowWidth = Dimensions.get("window").width;
 
 export default class App extends Component {
-  // const
   render() {
     return (
       <View style={styles.page}>
-        <View style={styles.starfield}>
+        <View style={overlayItemStyle}>
           <Starfield />
         </View>
         <View style={styles.cardWrapper}>
           <View style={styles.card}>
-            <AnimatedRadialGradient />
+            <GlowCard />
           </View>
         </View>
         <StatusBar style="auto" />
@@ -33,39 +34,25 @@ export default class App extends Component {
     );
   }
 }
-const overlayItemStyle = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  height: "100%",
-  width: "100%",
-};
+
 const styles = StyleSheet.create({
   page: {
     flex: 1,
     position: "relative",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: `hsla(260, 100%, 3%, 0.9)`,
+    backgroundColor: `hsl(260, 100%, 3%)`,
   },
   starfield: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    height: "100%",
-    width: "100%",
+    ...overlayItemStyle,
   },
   cardWrapper: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    height: "100%",
-    width: "100%",
+    ...overlayItemStyle,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
   card: {
-    backgroundColor: `hsla(260, 100%, 3%, 0.3)`,
     width: windowWidth / 1.4,
     aspectRatio: 1.5 / 1,
   },
