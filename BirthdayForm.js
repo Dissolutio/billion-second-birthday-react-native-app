@@ -3,7 +3,7 @@ import { Text, Button, SafeAreaView } from "react-native";
 import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import dayjs from "dayjs";
 
-const BirthdayForm = () => {
+export const BirthdayForm = () => {
   const initialTime = dayjs().subtract(18, "year");
   const [value, setValue] = useState(initialTime);
   const onChange = (event, selectedDate) => {
@@ -74,7 +74,9 @@ const BirthdayForm = () => {
         </SafeAreaView>
         <Button title={"Go!"} onPress={doSomething} />
         <Text
-          style={styles.text}
+          style={{
+            color: "#fff",
+          }}
         >{`Your billion-second birthday is: ${resultDate
           .format("MMM-DD YYYY HH:mm A")
           .toString()}`}</Text>
@@ -89,7 +91,11 @@ const BirthdayForm = () => {
         <Text>selected: {dayjs(value).format("MMM-DD YYYY HH:mm A")}</Text>
       </SafeAreaView>
       <Button title={"Go!"} onPress={doSomething} />
-      <Text style={styles.text}>{`Your billion-second birthday is: ${resultDate
+      <Text
+        style={{
+          color: "#fff",
+        }}
+      >{`Your billion-second birthday is: ${resultDate
         .format("MMM-DD YYYY HH:mm A")
         .toString()}`}</Text>
     </>

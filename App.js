@@ -4,6 +4,7 @@ import { View, StyleSheet, Dimensions, Text } from "react-native";
 import Starfield from "./Starfield";
 import { overlayItemStyle } from "./styles";
 import { GlowCard } from "./GlowCard";
+import { BirthdayForm } from "./BirthdayForm";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -17,6 +18,7 @@ export default class App extends Component {
         <View style={styles.cardWrapper}>
           <FullScreenCard>
             <GlowCard>
+              <BirthdayForm />
               <Text style={{ color: "#fff" }}>Yo!</Text>
             </GlowCard>
           </FullScreenCard>
