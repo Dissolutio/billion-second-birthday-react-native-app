@@ -24,12 +24,6 @@ class RadialGradientBg extends React.Component {
         style={{
           width: cardWidth,
           aspectRatio: 1.5 / 1,
-          // height: (cardWidth * 2) / 3,
-          justifyContent: "center",
-          alignItems: "center",
-          // position: "absolute",
-          // top: "10%",
-          // left: "10%",
         }}
       >
         <Svg height="100%" width={"100%"}>
@@ -57,12 +51,8 @@ class RadialGradientBg extends React.Component {
             </RadialGradient>
           </Defs>
           <Ellipse
-            // cx={windowWidth / 2}
-            // cy={windowHeight / 2}
             cx={"50%"}
             cy={"50%"}
-            // rx={Math.max(windowWidth, windowHeight) / 2}
-            // ry={Math.max(windowWidth, windowHeight) / 2}
             rx={"100%"}
             ry={"100%"}
             fill="url(#grad)"
@@ -75,6 +65,7 @@ class RadialGradientBg extends React.Component {
 const RadialGradientBackground =
   Animated.createAnimatedComponent(RadialGradientBg);
 
+// This wrapper component holds and animates the values for hue and position
 export const AnimatedRadialGradient = () => {
   const outerColor = React.useRef(new Animated.Value(0)).current;
   const gradientPos = React.useRef(new Animated.Value(0)).current;
