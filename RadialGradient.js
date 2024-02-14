@@ -20,45 +20,34 @@ class RadialGradientBg extends React.Component {
     const secondHsl = `hsl(${currentHue}, 100%, 80%)`;
     const colorHsl = `hsl(${currentHue}, 100%, 60%)`;
     return (
-      <View
-        style={{
-          width: cardWidth,
-          aspectRatio: 1.5 / 1,
-        }}
-      >
-        <Svg height="100%" width={"100%"}>
-          <Defs>
-            <RadialGradient
-              id="grad"
-              cx={`${gradientPosX}%`}
-              cy={`${gradientPosY}%`}
-              rx={"30%"}
-              ry={"30%"}
-              gradientUnits="userSpaceOnUse"
-            >
-              <Stop offset="0" stopColor={innerHsl ?? "#fff"} stopOpacity="1" />
-              <Stop
-                offset="0.2"
-                stopColor={secondHsl ?? "#fff"}
-                stopOpacity="1"
-              />
-              <Stop
-                offset="0.4"
-                stopColor={colorHsl ?? "#000"}
-                stopOpacity="1"
-              />
-              <Stop offset="1" stopColor={"transparent"} stopOpacity="1" />
-            </RadialGradient>
-          </Defs>
-          <Ellipse
-            cx={"50%"}
-            cy={"50%"}
-            rx={"100%"}
-            ry={"100%"}
-            fill="url(#grad)"
-          />
-        </Svg>
-      </View>
+      <Svg height="100%" width={"100%"}>
+        <Defs>
+          <RadialGradient
+            id="grad"
+            cx={`${gradientPosX}%`}
+            cy={`${gradientPosY}%`}
+            rx={"30%"}
+            ry={"30%"}
+            gradientUnits="userSpaceOnUse"
+          >
+            <Stop offset="0" stopColor={innerHsl ?? "#fff"} stopOpacity="1" />
+            <Stop
+              offset="0.2"
+              stopColor={secondHsl ?? "#fff"}
+              stopOpacity="1"
+            />
+            <Stop offset="0.4" stopColor={colorHsl ?? "#000"} stopOpacity="1" />
+            <Stop offset="1" stopColor={"transparent"} stopOpacity="0" />
+          </RadialGradient>
+        </Defs>
+        <Ellipse
+          cx={"50%"}
+          cy={"50%"}
+          rx={"100%"}
+          ry={"100%"}
+          fill="url(#grad)"
+        />
+      </Svg>
     );
   }
 }
@@ -105,12 +94,10 @@ export const AnimatedRadialGradient = () => {
   }, []);
 
   return (
-    <>
-      <RadialGradientBackground
-        hueValue={outerColor.interpolate(hueInterpolation)}
-        gradientPosX={gradientPos.interpolate(gradientPosXInterpolation)}
-        gradientPosY={gradientPos.interpolate(gradientPosYInterpolation)}
-      />
-    </>
+    <RadialGradientBackground
+      hueValue={outerColor.interpolate(hueInterpolation)}
+      gradientPosX={gradientPos.interpolate(gradientPosXInterpolation)}
+      gradientPosY={gradientPos.interpolate(gradientPosYInterpolation)}
+    />
   );
 };

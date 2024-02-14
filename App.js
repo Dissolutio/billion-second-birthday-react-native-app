@@ -24,9 +24,9 @@ export default class App extends Component {
           <Starfield />
         </View>
         <View style={styles.cardWrapper}>
-          <AnimatedRadialGradient />
-          {/* <View style={styles.card}>
-          </View> */}
+          <View style={styles.card}>
+            <AnimatedRadialGradient />
+          </View>
         </View>
         <StatusBar style="auto" />
       </View>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     position: "relative",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#000",
+    backgroundColor: `hsla(260, 100%, 3%, 0.9)`,
   },
   starfield: {
     position: "absolute",
@@ -65,14 +65,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   card: {
-    backgroundColor: `hsl(260, 100% 3%)`,
-    // backgroundColor: `white`,
+    backgroundColor: `hsla(260, 100%, 3%, 0.3)`,
     width: windowWidth / 1.4,
     aspectRatio: 1.5 / 1,
-    alignItems: "center",
-    justifyContent: "center",
-    fontFamily: "sans-serif",
-    borderRadius: 10,
   },
   text: {
     color: "rgb(255, 255, 255)",
