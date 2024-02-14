@@ -8,6 +8,54 @@ const GLOW_RADIUS = 100;
 const ANIMATION_DURATION = 4000;
 const glowInitialAngleAdjustment = 70; // this is to put the glow slightly behind the laser for a cooler effect
 
+// This wrapper component holds and animates the values for hue and position
+export const AnimatedRadialGradient = () => {
+  const outerColor = React.useRef(new Animated.Value(0)).current;
+  const gradientPos = React.useRef(new Animated.Value(0)).current;
+  const hueInterpolation = {
+    inputRange: [0, 1],
+    outputRange: [0, 360],
+  };
+  const gradientPosXInterpolation = {
+    inputRange: [0, 0.25, 0.5, 0.75, 1],
+    outputRange: [0, 100, 100, 0, 0],
+  };
+  const gradientPosYInterpolation = {
+    inputRange: [0, 0.25, 0.5, 0.75, 1],
+    outputRange: [0, 0, 100, 100, 0],
+  };
+
+  React.useEffect(() => {
+    // animate outer color
+    Animated.loop(
+      Animated.timing(outerColor, {
+        toValue: 1,
+        useNativeDriver: false,
+        duration: (ANIMATION_DURATION * 2) / Math.PI, // to give us a non-repetitive strobe
+        // easing: Easing.inOut(Easing.exp),
+        easing: Easing.linear,
+      })
+    ).start();
+    // animate gradient position
+    Animated.loop(
+      Animated.timing(gradientPos, {
+        toValue: 1,
+        useNativeDriver: false,
+        duration: ANIMATION_DURATION,
+        easing: Easing.linear,
+      })
+    ).start();
+  }, []);
+
+  return (
+    <AnimatedRadialGradientBg
+      hueValue={outerColor.interpolate(hueInterpolation)}
+      gradientPosX={gradientPos.interpolate(gradientPosXInterpolation)}
+      gradientPosY={gradientPos.interpolate(gradientPosYInterpolation)}
+    />
+  );
+};
+
 class RadialGradientBg extends React.Component {
   render() {
     const { hueValue, gradientPosX, gradientPosY } = this.props;
@@ -51,53 +99,5 @@ class RadialGradientBg extends React.Component {
     );
   }
 }
-const RadialGradientBackground =
+const AnimatedRadialGradientBg =
   Animated.createAnimatedComponent(RadialGradientBg);
-
-// This wrapper component holds and animates the values for hue and position
-export const AnimatedRadialGradient = () => {
-  const outerColor = React.useRef(new Animated.Value(0)).current;
-  const gradientPos = React.useRef(new Animated.Value(0)).current;
-  const hueInterpolation = {
-    inputRange: [0, 1],
-    outputRange: [0, 360],
-  };
-  const gradientPosXInterpolation = {
-    inputRange: [0, 0.25, 0.5, 0.75, 1],
-    outputRange: [0, 100, 100, 0, 0],
-  };
-  const gradientPosYInterpolation = {
-    inputRange: [0, 0.25, 0.5, 0.75, 1],
-    outputRange: [0, 0, 100, 100, 0],
-  };
-
-  React.useEffect(() => {
-    // animate outer color
-    Animated.loop(
-      Animated.timing(outerColor, {
-        toValue: 1,
-        useNativeDriver: false,
-        duration: (ANIMATION_DURATION * 2) / Math.PI, // to give us a non-repetitive strobe
-        // easing: Easing.inOut(Easing.exp),
-        easing: Easing.linear,
-      })
-    ).start();
-    // animate gradient position
-    Animated.loop(
-      Animated.timing(gradientPos, {
-        toValue: 1,
-        useNativeDriver: false,
-        duration: ANIMATION_DURATION,
-        easing: Easing.linear,
-      })
-    ).start();
-  }, []);
-
-  return (
-    <RadialGradientBackground
-      hueValue={outerColor.interpolate(hueInterpolation)}
-      gradientPosX={gradientPos.interpolate(gradientPosXInterpolation)}
-      gradientPosY={gradientPos.interpolate(gradientPosYInterpolation)}
-    />
-  );
-};
