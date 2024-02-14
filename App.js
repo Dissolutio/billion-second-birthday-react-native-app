@@ -11,6 +11,7 @@ import {
 import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import dayjs from "dayjs";
 import Starfield from "./Starfield";
+import { AnimatedRadialGradient } from "./RadialGradient";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -23,16 +24,22 @@ export default class App extends Component {
           <Starfield />
         </View>
         <View style={styles.cardWrapper}>
-          <View style={styles.card}>
-            <BirthdayForm />
-          </View>
+          <AnimatedRadialGradient />
+          {/* <View style={styles.card}>
+          </View> */}
         </View>
         <StatusBar style="auto" />
       </View>
     );
   }
 }
-
+const overlayItemStyle = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  height: "100%",
+  width: "100%",
+};
 const styles = StyleSheet.create({
   page: {
     flex: 1,
@@ -58,8 +65,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   card: {
-    // backgroundColor: `hsl(260, 100% 3%)`,
-    backgroundColor: `white`,
+    backgroundColor: `hsl(260, 100% 3%)`,
+    // backgroundColor: `white`,
     width: windowWidth / 1.4,
     aspectRatio: 1.5 / 1,
     alignItems: "center",
@@ -68,8 +75,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   text: {
-    // color: "rgb(255, 255, 255)",
-    color: "black",
+    color: "rgb(255, 255, 255)",
+    // color: "black",
   },
 });
 
