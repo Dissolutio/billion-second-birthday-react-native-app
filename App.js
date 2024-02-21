@@ -6,25 +6,23 @@ import { overlayItemStyle } from "./styles";
 import { GlowCard } from "./GlowCard";
 import { BirthdayForm } from "./BirthdayForm";
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.page}>
-        <View style={overlayItemStyle}>
-          <Starfield />
-        </View>
-        <View style={styles.cardWrapper}>
-          <FullScreenCard>
-            <GlowCard>
-              <BirthdayForm />
-            </GlowCard>
-          </FullScreenCard>
-        </View>
-        <StatusBar style="auto" />
+export default App = () => {
+  return (
+    <View style={styles.page}>
+      <View style={overlayItemStyle}>
+        <Starfield />
       </View>
-    );
-  }
-}
+      <View style={styles.cardWrapper}>
+        <FullScreenCard>
+          <GlowCard>
+            <BirthdayForm />
+          </GlowCard>
+        </FullScreenCard>
+      </View>
+      <StatusBar style="auto" />
+    </View>
+  );
+};
 const styles = StyleSheet.create({
   page: {
     flex: 1,
@@ -49,7 +47,6 @@ const FullScreenCard = (props) => {
       style={{
         width: windowWidth / 1.4,
         height: windowHeight / 1.4,
-        // aspectRatio: 1 / 1,
       }}
     >
       {props.children}
