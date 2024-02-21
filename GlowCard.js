@@ -11,9 +11,6 @@ export const GlowCard = (props) => {
       style={{
         flex: 1,
         position: "relative",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: `hsla(260, 100%, 3%, 0.3)`,
       }}
     >
       <View style={overlayItemStyle}>
@@ -22,14 +19,12 @@ export const GlowCard = (props) => {
       <View
         style={{
           ...overlayItemStyle,
-          backgroundColor: `hsla(260, 100%, 3%, 0.99)`,
+          backgroundColor: `hsla(260, 100%, 3%, 0.93)`,
           width: `${100 - borderWidth}%`,
           height: `${100 - borderWidth}%`,
           marginLeft: `${borderWidth / 2}%`,
           marginTop: `${borderWidth / 2}%`,
           flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
         }}
       >
         {props.children}
