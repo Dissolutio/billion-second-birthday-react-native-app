@@ -10,7 +10,7 @@ const glowInitialAngleAdjustment = 70; // this is to put the glow slightly behin
 
 // This wrapper component holds and animates the values for hue and position
 export const AnimatedRadialGradient = () => {
-  const outerColor = React.useRef(new Animated.Value(0)).current;
+  const hueValue = React.useRef(new Animated.Value(0)).current;
   const gradientPos = React.useRef(new Animated.Value(0)).current;
   const hueInterpolation = {
     inputRange: [0, 1],
@@ -28,7 +28,7 @@ export const AnimatedRadialGradient = () => {
   React.useEffect(() => {
     // animate outer color
     Animated.loop(
-      Animated.timing(outerColor, {
+      Animated.timing(hueValue, {
         toValue: 1,
         useNativeDriver: false,
         duration: (ANIMATION_DURATION * 2) / Math.PI, // to give us a non-repetitive strobe
@@ -49,7 +49,7 @@ export const AnimatedRadialGradient = () => {
 
   return (
     <AnimatedRadialGradientBg
-      hueValue={outerColor.interpolate(hueInterpolation)}
+      hueValue={hueValue.interpolate(hueInterpolation)}
       gradientPosX={gradientPos.interpolate(gradientPosXInterpolation)}
       gradientPosY={gradientPos.interpolate(gradientPosYInterpolation)}
     />
