@@ -1,12 +1,9 @@
 import React from "react";
-import { View, Dimensions, Animated, Easing } from "react-native";
+import { Animated, Easing } from "react-native";
 import Svg, { Defs, RadialGradient, Stop, Ellipse } from "react-native-svg";
 
 const HUE_SPEED = 1;
-const GLOW_SCALE = 1.5;
-const GLOW_RADIUS = 100;
 const ANIMATION_DURATION = 4000;
-const glowInitialAngleAdjustment = 70; // this is to put the glow slightly behind the laser for a cooler effect
 
 // This wrapper component holds and animates the values for hue and position
 export const AnimatedRadialGradient = () => {
@@ -56,14 +53,11 @@ export const AnimatedRadialGradient = () => {
   );
 };
 
+// this needs to be a class component for Animated.createAnimatedComponent to work
 class RadialGradientBg extends React.Component {
   render() {
     const { hueValue, gradientPosX, gradientPosY } = this.props;
-    const currentHue = hueValue * HUE_SPEED;
-    const windowWidth = Dimensions.get("window").width;
-    const windowHeight = Dimensions.get("window").height;
-    const vw = windowWidth / 100;
-    const cardWidth = 75 * vw;
+    const currentHue = hueValue ?? 1 * HUE_SPEED;
     const innerHsl = `hsl(${currentHue}, 100%, 90%)`;
     const secondHsl = `hsl(${currentHue}, 100%, 80%)`;
     const colorHsl = `hsl(${currentHue}, 100%, 60%)`;
@@ -72,8 +66,8 @@ class RadialGradientBg extends React.Component {
         <Defs>
           <RadialGradient
             id="grad"
-            cx={`${gradientPosX}%`}
-            cy={`${gradientPosY}%`}
+            cx={`${gradientPosX ?? 0}%`}
+            cy={`${gradientPosY ?? 0}%`}
             rx={"30%"}
             ry={"30%"}
             gradientUnits="userSpaceOnUse"

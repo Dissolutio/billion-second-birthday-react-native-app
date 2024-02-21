@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, Dimensions, Text } from "react-native";
 import Starfield from "./Starfield";
