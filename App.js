@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, Dimensions, Text } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import Starfield from "./Starfield";
 import { overlayItemStyle } from "./styles";
 import { GlowCard } from "./GlowCard";

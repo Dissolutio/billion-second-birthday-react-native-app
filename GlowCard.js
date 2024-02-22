@@ -19,7 +19,7 @@ const gradientPosYInterpolation = {
   outputRange: [0, 0, 100, 100, 0],
 };
 const phaseChangeDegrees = -70;
-const interpolateGlowRotation = {
+const glowRotationInterpolation = {
   inputRange: [0, 1],
   /* 
    -70 degrees, this adjusts the glow to happen a little "behind"
@@ -44,7 +44,6 @@ const interpolateGlowTranslateY = {
 };
 
 export const GlowCard = (props) => {
-  // const hueValue = React.useRef(new Animated.Value(0)).current;
   const animationProgress = React.useRef(new Animated.Value(0)).current;
 
   React.useEffect(() => {
@@ -79,7 +78,9 @@ export const GlowCard = (props) => {
       <View style={overlayItemStyle}>
         <AnimatedRotatingGlowBoxSvg
           hueValue={animationProgress.interpolate(hueInterpolation)}
-          rotationValue={animationProgress.interpolate(interpolateGlowRotation)}
+          rotationValue={animationProgress.interpolate(
+            glowRotationInterpolation
+          )}
           translateYValue={animationProgress.interpolate(
             interpolateGlowTranslateY
           )}
