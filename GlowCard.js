@@ -19,6 +19,7 @@ const gradientPosYInterpolation = {
   outputRange: [0, 0, 100, 100, 0],
 };
 const phaseChangeDegrees = -70;
+const absPhaseChangeDegrees = Math.abs(phaseChangeDegrees);
 const glowRotationInterpolation = {
   inputRange: [0, 1],
   /* 
@@ -29,18 +30,32 @@ const glowRotationInterpolation = {
    */
   outputRange: [phaseChangeDegrees, 360 + phaseChangeDegrees],
 };
-const phaseChange = Math.abs(phaseChangeDegrees) / 360;
-const maxTranslateY = 150;
+const phaseChangeRads = (absPhaseChangeDegrees / 360) * 2 * Math.PI;
+const maxY = 150;
+const initialY = 0;
+// const phaseChange = phaseChangeRads
+
+// const interpolateGlowTranslateY = {
+//   inputRange: [
+//     0,
+//     phaseChange,
+//     0.25 + phaseChange,
+//     0.5 + phaseChange,
+//     0.75 + phaseChange,
+//     1,
+//   ],
+//   outputRange: [
+//     phaseChange * initialY,
+//     0,
+//     maxTranslateY,
+//     0,
+//     maxTranslateY,
+//     phaseChange * initialY,
+//   ],
+// };
 const interpolateGlowTranslateY = {
-  inputRange: [
-    0,
-    phaseChange,
-    0.25 + phaseChange,
-    0.5 + phaseChange,
-    0.75 + phaseChange,
-    1,
-  ],
-  outputRange: [phaseChange * 150, 0, 150, 0, 150, phaseChange * 150],
+  inputRange: [0, 1],
+  outputRange: [maxY, maxY],
 };
 
 export const GlowCard = (props) => {
