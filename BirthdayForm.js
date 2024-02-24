@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, Button, View, Animated, StyleSheet } from "react-native";
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import dayjs from "dayjs";
+import RNDateTimePicker from "@react-native-community/datetimepicker";
 
 export const BirthdayForm = () => {
   const fadeAnim = React.useRef(new Animated.Value(0)).current;
@@ -23,17 +23,19 @@ export const BirthdayForm = () => {
     }).start();
   };
 
+  // const onChange = (event, selectedDate) => {
+  // };
+  const [mode, setMode] = React.useState("date");
+  const [show, setShow] = React.useState(false);
+
   const onChange = (event, selectedDate) => {
+    setShow(false);
     setValue(dayjs(selectedDate));
   };
 
   const showMode = (currentMode) => {
-    DateTimePickerAndroid.open({
-      value: new Date(value),
-      onChange,
-      mode: currentMode,
-      is24Hour: false,
-    });
+    setShow(true);
+    setMode(currentMode);
   };
 
   const showDatepicker = () => {
@@ -64,16 +66,27 @@ export const BirthdayForm = () => {
       <Animated.View
         style={[
           {
-            // Bind opacity to animated value
-            opacity: fadeAnim,
+            opacity: fadeAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [1, 0],
+            }),
           },
         ]}
       >
+        {show && (
+          <RNDateTimePicker
+            testID="dateTimePicker"
+            value={new Date(value)}
+            mode={mode}
+            is24Hour={true}
+            onChange={onChange}
+          />
+        )}
         <AppText text={selectedDate.format("MMM-DD YYYY HH:mm A").toString()} />
-        <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+        <ButtonBar>
           <Button onPress={showDatepicker} title="Set date" />
           <Button onPress={showTimepicker} title="Set time" />
-        </View>
+        </ButtonBar>
         <AppText
           text={`selected: ${dayjs(value).format("MMM-DD YYYY HH:mm A")}`}
         />
@@ -82,11 +95,7 @@ export const BirthdayForm = () => {
       <Animated.View
         style={[
           {
-            // Bind opacity to animated value
-            opacity: fadeAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [1, 0],
-            }),
+            opacity: fadeAnim,
           },
         ]}
       >
@@ -122,5 +131,12 @@ const AppText = ({ text }) => {
     >
       {text ?? ""}
     </Text>
+  );
+};
+const ButtonBar = (props) => {
+  return (
+    <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+      {props.children}
+    </View>
   );
 };
